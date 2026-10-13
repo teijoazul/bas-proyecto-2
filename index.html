@@ -1,0 +1,1462 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BAS | Sistemas de asistencia biónica</title>
+<meta name="description" content="BAS desarrolla tecnologías accesibles para la rehabilitación de la mano: un guante terapéutico y una prótesis biónica. Proyecto ganador en Hecho en Merlo 2025.">
+<meta name="theme-color" content="#000046">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BAS | Sistemas de asistencia biónica">
+<meta property="og:description" content="Un guante terapéutico y una prótesis biónica, accesibles. Tocá, probá y conocé cómo funcionan.">
+<meta property="og:image" content="img/og.jpg">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="preload" href="fonts/Poppins-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/Poppins-Bold.woff" as="font" type="font/woff" crossorigin>
+<style>
+@font-face{font-family:"Poppins";font-weight:300;font-style:normal;font-display:swap;src:url(fonts/Poppins-Light.woff) format("woff")}
+@font-face{font-family:"Poppins";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/Poppins-Regular.woff) format("woff")}
+@font-face{font-family:"Poppins";font-weight:500;font-style:normal;font-display:swap;src:url(fonts/Poppins-Medium.woff) format("woff")}
+@font-face{font-family:"Poppins";font-weight:700;font-style:normal;font-display:swap;src:url(fonts/Poppins-Bold.woff) format("woff")}
+
+:root{
+  --ink:#000046;
+  --ink-2:#08085c;
+  --indigo:#0a0088;
+  --royal:#2a3be0;
+  --sky:#42a5f5;
+  --sig:#4fd8ff;
+  --paper:#f3f5ff;
+  --tint:#e3e7ff;
+  --text:#0c0c3d;
+  --muted:#4a4d86;
+  --alert:#ff5a5a;
+  --r-xl:32px;
+  --r-lg:24px;
+  --r-md:16px;
+  --font:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);font-weight:400;font-size:1.0625rem;line-height:1.65;color:var(--text);background:var(--paper);overflow-x:hidden}
+body.lock{overflow:hidden}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:3px solid var(--sig);outline-offset:3px;border-radius:6px}
+section[id]{scroll-margin-top:56px}
+.wrap{width:100%;max-width:1120px;margin-inline:auto;padding-inline:20px}
+.sec{padding-block:clamp(64px,10vw,116px)}
+.on-dark{color:#fff}
+.on-dark .lead,.impact .lead,.prot .lead,.try .lead,.who-sec .lead,.what .lead{color:rgba(255,255,255,.86)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+h2{font-weight:700;font-size:clamp(1.9rem,6.2vw,3rem);line-height:1.12;letter-spacing:-.02em;max-width:18ch}
+h3{font-weight:700;font-size:1.25rem;line-height:1.25;letter-spacing:-.01em}
+.lead{font-size:clamp(1.05rem,2.6vw,1.3rem);line-height:1.6;font-weight:300;color:var(--muted);max-width:56ch}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(32px,6vw,56px)}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;font-weight:500;font-size:1rem;text-decoration:none;transition:transform .15s ease,background .2s ease,color .2s ease}
+.btn:active{transform:scale(.97)}
+.btn-white{background:#fff;color:var(--indigo)}
+.btn-white:hover{background:var(--tint)}
+.btn-line{border:2px solid rgba(255,255,255,.7);color:#fff}
+.btn-line:hover{background:rgba(255,255,255,.12)}
+.btn-solid{background:var(--indigo);color:#fff}
+.btn-solid:hover{background:var(--royal)}
+
+/* ===== barra superior ===== */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;height:56px;display:flex;align-items:center}
+.top::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(0,0,70,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,.08);opacity:0;transition:opacity .25s ease}
+.top.solid::before{opacity:1}
+.top .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:700;font-size:1.2rem;letter-spacing:-.01em}
+.brand img{width:30px;height:auto}
+.menu-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;position:relative;z-index:61}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .25s ease,background .2s ease}
+.menu-btn span{position:relative}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0}
+.menu-btn span::before{top:-7px}
+.menu-btn span::after{top:7px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:60;background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:80px 28px 40px;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s}
+.menu.open{opacity:1;visibility:visible}
+.menu a{display:block;color:#fff;text-decoration:none;font-weight:700;font-size:clamp(1.5rem,6.5vw,2.1rem);line-height:1.2;padding:10px 0;letter-spacing:-.01em}
+.menu a[aria-current="true"]{color:var(--sig)}
+@media (min-width:1120px){
+  .menu-btn{display:none}
+  .menu{position:static;inset:auto;z-index:auto;background:none;flex-direction:row;padding:0;opacity:1;visibility:visible;gap:2px}
+  .menu a{font-size:.88rem;font-weight:500;padding:8px 12px;border-radius:999px;color:rgba(255,255,255,.88)}
+  .menu a:hover{background:rgba(255,255,255,.12);color:#fff}
+  .menu a[aria-current="true"]{background:rgba(255,255,255,.16);color:#fff}
+}
+
+/* ===== hero ===== */
+.hero{background:var(--ink);color:#fff;padding-top:96px;padding-bottom:0;overflow:hidden;position:relative}
+.hero .wrap{display:grid;gap:8px;position:relative}
+.hero-copy{display:grid;gap:18px;align-content:center;padding-bottom:20px;z-index:2}
+.hero h1{font-weight:700;font-size:clamp(5.6rem,25vw,12.5rem);line-height:.86;letter-spacing:-.045em;margin-left:-.04em}
+.hero h1{display:flex;align-items:center;gap:.06em}
+.hero-logo{height:.78em;width:auto;margin-top:.02em}
+.hero .sub{font-weight:700;font-size:clamp(1.35rem,5vw,2.1rem);line-height:1.15;letter-spacing:-.015em}
+.award{background:#fff;color:var(--ink);border-radius:var(--r-md);padding:16px 20px;font-size:.95rem;line-height:1.55;font-weight:400;max-width:520px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.hero-fig{position:relative;justify-self:center;width:min(66vw,270px);height:min(46vh,330px);overflow:hidden;margin-top:6px}
+.hero-fig::before{content:"";position:absolute;inset:0;background:radial-gradient(closest-side at 50% 45%,rgba(42,59,224,.7),rgba(10,0,136,0) 72%);z-index:0}
+.hero-fig img{position:relative;z-index:1;width:100%;height:auto}
+@media (min-width:900px){
+  .hero{padding-top:120px}
+  .hero{padding-bottom:0}
+  .hero .wrap{grid-template-columns:1.1fr .9fr;align-items:end;gap:40px;min-height:min(100svh,860px)}
+  .hero-copy{padding-bottom:64px;align-self:center;padding-top:20px}
+  .hero-fig{width:min(100%,400px);height:min(84svh,780px);margin:0 auto;align-self:end}
+  .hero-fig img{width:100%}
+}
+
+/* ===== qué es BAS ===== */
+.what{background:var(--indigo);color:#fff}
+.what h2{margin-bottom:20px;max-width:none}
+.what .def{font-weight:300;font-size:clamp(1.45rem,4.6vw,2.35rem);line-height:1.38;letter-spacing:-.012em;max-width:30em;margin-bottom:clamp(36px,6vw,60px)}
+.paths{display:grid;gap:16px}
+.path{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center;background:#fff;color:var(--text);border-radius:var(--r-lg);padding:20px 22px 20px 18px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.path:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,40,.3)}
+.path img{width:96px;height:112px;object-fit:contain}
+.path h3{color:var(--indigo);margin-bottom:6px}
+.path p{font-size:.97rem;line-height:1.55;color:var(--muted)}
+.purpose{margin-top:clamp(40px,7vw,72px);display:grid;gap:14px;max-width:46em}
+.purpose p{font-weight:300;font-size:clamp(1.1rem,3vw,1.35rem);line-height:1.6;color:rgba(255,255,255,.9)}
+.purpose strong{font-weight:700;font-size:clamp(1.6rem,5vw,2.3rem);letter-spacing:-.02em;line-height:1.15;display:block}
+@media (min-width:800px){.paths{grid-template-columns:1fr 1fr}.path{grid-template-columns:110px 1fr}.path img{width:110px;height:130px}}
+
+/* ===== impacto ===== */
+.impact{background:var(--ink);color:#fff}
+.impact .sec-head h2{max-width:14ch}
+.impact-card{background:#fff;color:var(--text);border-radius:var(--r-xl);padding:clamp(22px,5vw,48px);display:grid;gap:clamp(28px,5vw,48px)}
+.stat-acv{display:grid;grid-template-columns:112px 1fr;gap:18px;align-items:center}
+.ring{position:relative;width:112px;height:112px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .trk{stroke:var(--tint)}
+.ring .val{stroke:var(--indigo);stroke-linecap:round;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1)}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.9rem;letter-spacing:-.03em;color:var(--indigo)}
+.stat p{font-size:1.02rem;line-height:1.55}
+.stat small{display:block;margin-top:6px;font-size:.82rem;color:var(--muted);font-weight:400}
+.access{display:grid;gap:18px}
+.access h3{font-size:clamp(1.3rem,3.6vw,1.75rem);letter-spacing:-.02em;color:var(--indigo);max-width:24ch}
+.crowd{display:grid;grid-template-columns:repeat(20,1fr);gap:clamp(3px,1vw,7px);max-width:560px}
+.crowd svg{width:100%;height:auto;fill:var(--tint);transition:fill .5s ease}
+.crowd svg.a{fill:var(--indigo)}
+.crowd svg.b{fill:#8d92f2}
+.crowd-key{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.85rem;color:var(--muted)}
+.crowd-key i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px}
+.facts{display:grid;gap:16px}
+.fact{border-top:2px solid var(--tint);padding-top:16px}
+.fact strong{display:block;font-size:clamp(1.25rem,3.4vw,1.55rem);letter-spacing:-.02em;color:var(--indigo);line-height:1.15;margin-bottom:6px}
+.fact p{font-size:.98rem;line-height:1.55}
+.fact small{display:block;margin-top:4px;font-size:.8rem;color:var(--muted)}
+.awards{display:grid;gap:14px;margin-top:clamp(28px,5vw,44px)}
+.award-row{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:center;border:1.5px solid rgba(255,255,255,.28);border-radius:var(--r-md);padding:16px 20px}
+.award-row svg{width:48px;height:48px}
+.award-row h3{font-size:1.05rem;margin-bottom:2px}
+.award-row p{font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.5}
+@media (min-width:860px){
+  .impact-card{grid-template-columns:1fr 1.15fr;align-items:start}
+  .facts{grid-column:1/-1;grid-template-columns:1fr 1fr 1fr}
+  .awards{grid-template-columns:1fr 1fr}
+}
+
+/* ===== órtesis ===== */
+.orte{background:var(--paper)}
+.orte-grid{display:grid;gap:clamp(32px,6vw,64px)}
+.copy{display:grid;gap:18px;align-content:start}
+.copy p{max-width:58ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--tint);color:var(--indigo);font-weight:500;font-size:.88rem;line-height:1.4}
+.photo-card{position:relative;background:linear-gradient(160deg,var(--indigo),var(--ink));border-radius:var(--r-xl);padding:22px 18px 18px;overflow:hidden}
+.hot-stage{position:relative;width:min(62%,250px);margin:0 auto}
+.hot-stage img{width:100%;height:auto}
+.hot{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;display:grid;place-items:center}
+.hot::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--sig);box-shadow:0 0 0 0 rgba(79,216,255,.7);animation:ping 2s infinite}
+.hot::after{content:"";position:absolute;inset:13px;border-radius:50%;background:var(--ink);border:3px solid #fff;border-width:0;display:none}
+.hot[aria-pressed="true"]::before{background:#fff;animation:none;box-shadow:0 0 0 6px rgba(255,255,255,.3)}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(79,216,255,.7)}70%{box-shadow:0 0 0 14px rgba(79,216,255,0)}100%{box-shadow:0 0 0 0 rgba(79,216,255,0)}}
+.hot-info{margin-top:14px;background:#fff;color:var(--text);border-radius:var(--r-md);padding:16px 18px;min-height:112px}
+.hot-info h3{font-size:1.05rem;color:var(--indigo);margin-bottom:4px}
+.hot-info p{font-size:.95rem;line-height:1.5}
+.hint{font-size:.85rem;color:rgba(255,255,255,.8);text-align:center;margin-top:10px}
+.how{margin-top:clamp(48px,8vw,88px)}
+.how h3,.help h3{font-size:clamp(1.4rem,4vw,1.9rem);letter-spacing:-.02em;margin-bottom:22px}
+.flow{display:grid;gap:0;counter-reset:fl}
+.flow li{position:relative;display:grid;grid-template-columns:44px 1fr;gap:16px;padding-bottom:22px}
+.flow li::before{counter-increment:fl;content:counter(fl);width:44px;height:44px;border-radius:50%;background:var(--indigo);color:#fff;display:grid;place-items:center;font-weight:700;position:relative;z-index:1}
+.flow li::after{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:var(--tint)}
+.flow li:last-child{padding-bottom:0}
+.flow li:last-child::after{display:none}
+.flow h4{font-size:1.05rem;font-weight:700;line-height:1.3;padding-top:9px}
+.flow p{font-size:.96rem;color:var(--muted);line-height:1.55}
+.help{margin-top:clamp(48px,8vw,88px)}
+.puzzle{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-width:760px}
+.tile{padding:22px 18px 24px;color:#fff;display:grid;gap:10px;align-content:start;min-height:190px}
+.tile svg{width:42px;height:42px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tile h4{font-size:1.02rem;line-height:1.3;font-weight:700}
+.tile p{font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.86)}
+.tile:nth-child(1){background:var(--indigo);border-radius:var(--r-lg) 8px 8px 8px}
+.tile:nth-child(2){background:var(--ink-2);border-radius:8px var(--r-lg) 8px 8px}
+.tile:nth-child(3){background:var(--ink-2);border-radius:8px 8px 8px var(--r-lg)}
+.tile:nth-child(4){background:var(--indigo);border-radius:8px 8px var(--r-lg) 8px}
+@media (min-width:900px){
+  .orte-grid{grid-template-columns:1.05fr .95fr;align-items:start}
+  .photo-card{position:sticky;top:84px}
+  .flow{grid-template-columns:repeat(4,1fr);gap:20px}
+  .flow li{grid-template-columns:1fr;padding-bottom:0;gap:12px}
+  .flow li::after{left:44px;top:21px;bottom:auto;right:-20px;width:auto;height:2px}
+  .flow h4{padding-top:0}
+  .tile{padding:28px 26px 30px}
+}
+
+/* ===== prótesis: recorrido ===== */
+.prot{background:var(--ink);color:#fff;position:relative}
+.prot .sec-head h2{max-width:16ch}
+.story{display:grid;gap:0}
+.stage-wrap{position:sticky;top:56px;z-index:5;margin-inline:-20px;padding:10px 20px 14px;background:linear-gradient(var(--ink) 82%,rgba(0,0,70,0))}
+.stage{background:linear-gradient(170deg,#0c0c75,#02024f);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);padding:10px 10px 8px;position:relative}
+.stage svg.scene-svg{width:100%;height:auto;max-height:40vh;margin-inline:auto}
+.rail{display:flex;align-items:center;gap:0;padding:2px 6px 8px}
+.rail button{flex:1;height:30px;display:grid;place-items:center;position:relative}
+.rail button::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(255,255,255,.2);transform:translateY(-1px)}
+.rail button:first-child::before{left:50%}
+.rail button:last-child::before{right:50%}
+.rail button i{position:relative;width:12px;height:12px;border-radius:50%;background:#2d2f8f;border:2px solid rgba(255,255,255,.35);transition:all .25s ease}
+.rail button.done::before{background:var(--sig)}
+.rail button.done i{background:var(--sig);border-color:var(--sig)}
+.rail button.cur i{width:20px;height:20px;background:#fff;border-color:var(--sig);box-shadow:0 0 0 5px rgba(79,216,255,.25)}
+.cap{font-weight:700;font-size:1rem;text-align:center;padding:0 6px 4px;min-height:1.6em}
+.steps{display:grid;gap:0;padding-bottom:10px}
+.step{min-height:62vh;padding:clamp(24px,4vw,40px) 4px;display:grid;align-content:start;gap:10px;opacity:.38;transition:opacity .35s ease}
+.step.cur{opacity:1}
+.step .n{width:36px;height:36px;border-radius:50%;background:var(--sig);color:var(--ink);font-weight:700;display:grid;place-items:center;font-size:.95rem}
+.step h3{font-size:clamp(1.4rem,4.2vw,1.9rem);letter-spacing:-.02em}
+.step p{font-weight:300;font-size:1.06rem;line-height:1.65;color:rgba(255,255,255,.9);max-width:44ch}
+.logic{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:8px;font-size:.88rem}
+.logic span{padding:7px 14px;border-radius:999px;border:1.5px solid rgba(255,255,255,.4)}
+.logic b{font-weight:400;color:var(--sig)}
+.logic .q{background:var(--sig);color:var(--ink);border-color:var(--sig);font-weight:500}
+.prot-extra{margin-top:clamp(40px,6vw,72px);display:grid;gap:clamp(28px,5vw,48px)}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gallery figure{background:#fff;border-radius:var(--r-lg);padding:12px 12px 14px;color:var(--text);display:grid;gap:8px;align-content:start}
+.gallery img{width:100%;height:230px;object-fit:contain}
+.gallery figcaption{font-size:.88rem;line-height:1.45;color:var(--muted);text-align:center}
+.adv{display:grid;gap:10px}
+.adv li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:1.02rem;font-weight:500}
+.adv svg{width:28px;height:28px;stroke:var(--sig);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media (min-width:900px){
+  .story{grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:start}
+  .stage-wrap{order:2;top:84px;margin:0;padding:0;background:none}
+  .stage{padding:16px 16px 10px}
+  .stage svg.scene-svg{max-height:none}
+  .steps{order:1}
+  .step{min-height:78vh;padding-block:12vh 4vh}
+  .step:first-child{padding-top:6vh}
+  .prot-extra{grid-template-columns:1.2fr .8fr;align-items:center}
+  .gallery img{height:260px}
+}
+
+/* escenas del recorrido */
+.scene{opacity:0;transition:opacity .5s ease;pointer-events:none}
+.scene.on{opacity:1}
+.scene text{font-family:var(--font);fill:#fff;font-size:11.5px;font-weight:500}
+.scene .lbl{font-size:11px;fill:rgba(255,255,255,.9)}
+.scene .sig-t{fill:var(--sig)}
+.glow{filter:drop-shadow(0 0 5px rgba(79,216,255,.9))}
+.b-fill{fill:#3b43c9;stroke:#9fa6ff;stroke-width:2.2;stroke-linejoin:round}
+.b-fold{fill:none;stroke:#9fa6ff;stroke-width:2;stroke-linecap:round;opacity:.8}
+.cortex{fill:none;stroke:var(--sig);stroke-width:7;stroke-linecap:round;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.neu{fill:none;stroke:#aeb4ff;stroke-width:3;stroke-linecap:round}
+.soma{fill:#3b43c9;stroke:#aeb4ff;stroke-width:2.5}
+.myelin{fill:#5b64e6;stroke:#aeb4ff;stroke-width:1.5}
+.vert{fill:#c9cdff;stroke:#7d84e8;stroke-width:1.5}
+.cord{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;opacity:.9}
+.nerve{fill:none;stroke:var(--sig);stroke-width:3;stroke-linecap:round;stroke-dasharray:3 7;opacity:.9}
+.fiber{fill:#d04b6e;stroke:#ff9fb7;stroke-width:1.5}
+.fiber-ln{fill:none;stroke:#ffc3d1;stroke-width:1.6;stroke-linecap:round;opacity:.9}
+.muscle{transform-box:fill-box;transform-origin:50% 50%;animation:contract 2.8s ease-in-out infinite}
+@keyframes contract{0%,18%,100%{transform:scale(1,1)}38%,66%{transform:scale(.8,1.38)}}
+.ion{fill:#ffd166}
+.skin{fill:#e8b996;opacity:.95}
+.skin-ln{fill:none;stroke:#7a4a30;stroke-width:1.5}
+.elec{fill:#cfd2ff;stroke:#fff;stroke-width:1.5}
+.elec.ref{fill:#ffd166}
+.board{fill:#c8153a;stroke:#ff8aa3;stroke-width:1.5}
+.field{fill:none;stroke:var(--sig);stroke-width:2;opacity:0;transition:opacity .25s ease}
+.burst .field{opacity:.9;animation:pulse .9s ease-in-out infinite}
+.scope{fill:#00002f;stroke:rgba(255,255,255,.4);stroke-width:1.5}
+.trace{fill:none;stroke:var(--sig);stroke-width:1.8;stroke-linejoin:round}
+.thr{stroke:#fff;stroke-width:1.2;stroke-dasharray:5 5;opacity:.8}
+.ard{fill:#0b6f8f;stroke:#7de3f7;stroke-width:1.5}
+.wire{fill:none;stroke:var(--sig);stroke-width:2;stroke-linecap:round;stroke-dasharray:4 6;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-20}}
+
+/* ===== mano (compartida) ===== */
+.hand{--hand:#2f4fe0;--hand-edge:#0b1a8a;--palm:var(--hand);--arm:var(--hand);--ring:transparent;--logo:rgba(255,255,255,.55)}
+.hand.glove{--hand:#f2f3f9;--hand-edge:#7f86b0;--palm:#8b92a3;--arm:#f2f3f9;--ring:#27a2e6;--logo:transparent}
+.h-arm{fill:var(--arm);stroke:var(--hand-edge);stroke-width:2.2;stroke-linejoin:round}
+.h-palm{fill:var(--palm);stroke:var(--hand-edge);stroke-width:2.2;stroke-linejoin:round}
+.h-logo{fill:var(--logo);font-family:var(--font);font-weight:700;font-size:20px;letter-spacing:.04em}
+.seg-edge{stroke:var(--hand-edge);stroke-linecap:round}
+.seg-fill{stroke:var(--hand);stroke-linecap:round}
+.ring-b{stroke:var(--ring);stroke-linecap:butt}
+.knuck{fill:#fff;opacity:.35}
+.string{stroke:rgba(255,255,255,.7);stroke-width:1;fill:none}
+.glove .string{stroke:rgba(30,30,60,.55)}
+.servo{fill:#171736;stroke:#000;stroke-width:.8}
+.horn{stroke:#fff;stroke-width:2.2;stroke-linecap:round}
+
+/* ===== probalo vos ===== */
+.try{background:var(--indigo);color:#fff}
+.try .sec-head h2{max-width:12ch}
+.tabs{display:inline-flex;background:rgba(0,0,60,.55);border-radius:999px;padding:5px;gap:4px;margin-bottom:22px}
+.tabs button{min-height:46px;padding:0 18px;white-space:nowrap;border-radius:999px;font-weight:500;font-size:.95rem;color:rgba(255,255,255,.85);transition:background .2s ease,color .2s ease}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--indigo)}
+.sim{display:grid;gap:18px}
+.sim-hand{background:linear-gradient(170deg,#12128f,#04045c);border-radius:var(--r-xl);padding:14px 14px 16px;display:grid;gap:8px;justify-items:center}
+.sim-hand svg.hand{width:min(52vw,210px);height:auto}
+.angles{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;width:100%;max-width:420px}
+.angles div{background:rgba(255,255,255,.1);border-radius:12px;padding:6px 2px;text-align:center;font-size:.72rem;line-height:1.25;color:rgba(255,255,255,.85)}
+.angles b{display:block;font-size:.98rem;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.sim-note{font-size:.84rem;color:rgba(255,255,255,.78);text-align:center}
+.panel{background:#fff;color:var(--text);border-radius:var(--r-xl);padding:18px;display:grid;gap:14px;align-content:start}
+.panel[hidden]{display:none}
+.phone{background:#f6f8ff;border:6px solid var(--ink);border-radius:32px;overflow:hidden;max-width:380px;width:100%;margin-inline:auto;transition:filter .3s ease,opacity .3s ease}
+.phone-bar{background:linear-gradient(90deg,#1c5fd0,#3f9bf0);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:.78rem;font-weight:500}
+.phone-bar i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#7dffb2;margin-right:6px}
+.phone-body{padding:14px 14px 16px;display:grid;gap:10px}
+.who{font-size:.72rem;line-height:1.3;color:var(--muted)}
+.who b{display:block;font-size:.98rem;color:var(--text)}
+.fbtn{min-height:46px;border-radius:14px;background:#3f9bf0;color:#fff;font-weight:500;font-size:.92rem;box-shadow:0 3px 0 #2877c7;transition:transform .1s ease,background .2s ease}
+.fbtn:active{transform:translateY(2px);box-shadow:0 1px 0 #2877c7}
+.fbtn[aria-pressed="true"]{background:#1c5fd0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fgrid .full{grid-column:1/-1;justify-self:center;width:calc(50% - 5px)}
+.all{background:#3f9bf0;width:100%}
+.off{background:var(--alert);box-shadow:0 3px 0 #c93d3d;width:100%}
+.modes{display:flex;flex-wrap:wrap;gap:6px}
+.modes button{min-height:40px;padding:0 14px;border-radius:999px;background:#e3e7ff;color:var(--indigo);font-size:.82rem;font-weight:500}
+.modes button[aria-selected="true"]{background:var(--indigo);color:#fff}
+.mode-pane{display:grid;gap:10px;min-height:150px;align-content:start}
+.mode-pane[hidden]{display:none}
+.mode-pane .hint2{font-size:.8rem;color:var(--muted);line-height:1.45}
+.phone.dim .modes,.phone.dim .mode-pane{opacity:.35;pointer-events:none}
+.rng{width:100%;accent-color:var(--indigo);height:32px}
+.rng-l{display:flex;justify-content:space-between;font-size:.8rem;font-weight:500}
+.sel{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sel button{min-height:42px;border-radius:12px;background:#e3e7ff;color:var(--indigo);font-weight:500;font-size:.86rem}
+.sel button[aria-pressed="true"]{background:var(--indigo);color:#fff}
+.muscle-ui{display:grid;gap:16px}
+.meter{background:#02023a;border-radius:var(--r-md);padding:12px 12px 8px;position:relative}
+.meter svg{width:100%;height:auto}
+.meter .t{font-size:.78rem;color:rgba(255,255,255,.85);display:flex;justify-content:space-between;margin-bottom:6px}
+.meter .t b{color:var(--sig);font-weight:500}
+.press{min-height:92px;border-radius:var(--r-lg);background:var(--indigo);color:#fff;font-weight:700;font-size:1.05rem;line-height:1.3;padding:14px 22px;display:grid;place-items:center;text-align:center;touch-action:none;user-select:none;-webkit-user-select:none;transition:background .15s ease,transform .15s ease;box-shadow:0 5px 0 #05005c}
+.press.hold{background:var(--royal);transform:translateY(3px);box-shadow:0 2px 0 #05005c}
+.logic2{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:.82rem}
+.logic2 span{padding:6px 12px;border-radius:999px;background:var(--tint);color:var(--indigo);font-weight:500;transition:background .15s ease,color .15s ease}
+.logic2 span.hi{background:var(--indigo);color:#fff}
+.logic2 b{font-weight:400;color:var(--muted)}
+.count{font-size:.9rem;color:var(--muted)}
+.count b{color:var(--indigo)}
+@media (min-width:900px){
+  .sim{grid-template-columns:.85fr 1.15fr;align-items:start}
+  .sim-hand{position:sticky;top:84px;padding:22px}
+  .sim-hand svg.hand{width:min(100%,300px)}
+  .panel{padding:26px}
+}
+@media (max-width:899px){
+  .sim-hand{position:sticky;top:60px;z-index:4;padding:10px 12px 12px}
+  .sim-hand svg.hand{width:min(38vw,150px)}
+  .angles div{font-size:.66rem}
+  .angles b{font-size:.9rem}
+  .sim-note{display:none}
+}
+
+/* ===== app ===== */
+.app{background:var(--paper)}
+.app-grid{display:grid;gap:clamp(28px,5vw,56px);align-items:start}
+.app-visual{display:grid;justify-items:center}
+.app-visual figure{width:min(100%,310px);background:#fff;border-radius:var(--r-xl);padding:14px;box-shadow:0 24px 50px rgba(10,0,136,.16)}
+.app-visual figure[hidden]{display:none}
+.app-visual img{width:100%;height:auto;border-radius:18px}
+.app-visual #figRep{width:min(100%,420px)}
+.feat{display:grid;gap:14px;margin-top:6px}
+.feat li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.feat .ic{width:44px;height:44px;border-radius:14px;background:var(--indigo);display:grid;place-items:center}
+.feat svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.feat h4{font-size:1.02rem;font-weight:700;line-height:1.3}
+.feat p{font-size:.94rem;color:var(--muted);line-height:1.5}
+.tabs.light{background:var(--tint)}
+.tabs.light button{color:var(--indigo)}
+.tabs.light button[aria-selected="true"]{background:var(--indigo);color:#fff}
+@media (min-width:900px){.app-grid{grid-template-columns:.8fr 1.2fr}.app-visual{position:sticky;top:84px}}
+
+/* ===== componentes ===== */
+.comp{background:#fff}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.filters button{min-height:44px;padding:0 20px;border-radius:999px;background:var(--tint);color:var(--indigo);font-weight:500;font-size:.95rem;transition:background .2s ease,color .2s ease}
+.filters button[aria-pressed="true"]{background:var(--indigo);color:#fff}
+.cards{display:grid;grid-template-columns:1fr;gap:16px}
+.card{background:var(--paper);border-radius:var(--r-lg);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.card[hidden]{display:none}
+.card .im{background:#fff;margin:10px 10px 0;border-radius:calc(var(--r-lg) - 8px);height:170px;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
+.card .im img{width:auto;height:auto;max-width:100%;max-height:142px;object-fit:contain}
+.card .tx{padding:16px 20px 22px;display:grid;gap:8px;align-content:start}
+.card .tag{justify-self:start;font-size:.78rem;font-weight:500;padding:3px 12px;border-radius:999px;background:var(--indigo);color:#fff}
+.card .tag.p{background:#0b6f8f}
+.card .tag.b{background:#5b3fc4}
+.card h3{font-size:1.1rem}
+.card p{font-size:.94rem;line-height:1.55;color:var(--muted)}
+.struct{margin-top:26px;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;background:var(--tint);border-radius:var(--r-md);padding:16px 20px}
+.struct svg{width:44px;height:44px;stroke:var(--indigo);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.struct p{font-size:.95rem;line-height:1.5}
+@media (min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+@media (min-width:980px){.cards{grid-template-columns:repeat(3,1fr)}}
+
+/* ===== a quién le sirve ===== */
+.who-sec{background:var(--ink);color:#fff}
+.who-sec h2{max-width:12ch}
+.users{display:grid;gap:14px}
+.user{border:1.5px solid rgba(255,255,255,.3);border-radius:var(--r-lg);padding:24px 24px 26px;display:grid;gap:10px;grid-template-columns:56px 1fr;align-items:start}
+.user svg{width:56px;height:56px;stroke:var(--sig);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.user p{font-weight:300;font-size:.98rem;line-height:1.55;color:rgba(255,255,255,.85)}
+.user h3{margin-bottom:4px}
+@media (min-width:800px){.users{grid-template-columns:repeat(3,1fr)}.user{grid-template-columns:1fr}}
+
+/* ===== equipo ===== */
+.team{background:var(--paper)}
+.team .sec-head h2{max-width:10ch}
+.people{display:grid;gap:14px}
+.person{background:#fff;border-radius:var(--r-lg);padding:22px 24px;display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:center}
+.person i{width:64px;height:64px;border-radius:50%;background:var(--indigo);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:1.35rem;letter-spacing:-.02em}
+.person:nth-child(2) i{background:var(--royal)}
+.person:nth-child(3) i{background:var(--ink)}
+.person h3{font-size:1.2rem}
+@media (min-width:800px){.people{grid-template-columns:repeat(3,1fr)}.person{grid-template-columns:1fr;gap:14px;padding:28px}}
+
+/* ===== contacto ===== */
+.contact{background:var(--indigo);color:#fff}
+.contact .big{font-weight:700;font-size:clamp(2.6rem,11vw,6.5rem);line-height:.98;letter-spacing:-.04em;margin-bottom:22px}
+.contact .lead{color:rgba(255,255,255,.86);margin-bottom:30px}
+.links{display:grid;gap:12px;max-width:520px}
+.links a{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:center;background:#fff;color:var(--text);text-decoration:none;border-radius:var(--r-md);padding:12px 18px 12px 12px;font-weight:500;transition:transform .15s ease}
+.links a:hover{transform:translateX(4px)}
+.links .ic{width:44px;height:44px;border-radius:12px;background:var(--indigo);display:grid;place-items:center}
+.links svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.links small{display:block;font-weight:300;font-size:.8rem;color:var(--muted);line-height:1.2}
+.contact .wrap{display:grid;gap:30px}
+@media (min-width:900px){.contact .wrap{grid-template-columns:1.2fr .8fr;align-items:end}}
+footer{background:var(--ink);color:rgba(255,255,255,.75);padding:34px 0 40px;font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between}
+footer img{width:34px}
+footer .f1{display:flex;align-items:center;gap:12px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="arr" viewBox="0 0 16 10"><path d="M1 5h13M10 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="pp" viewBox="0 0 10 22"><circle cx="5" cy="3.4" r="3.2"/><path d="M1.4 8h7.2c.8 0 1.4.6 1.4 1.4V15H8.2v6.4c0 .3-.3.6-.6.6H6.2a.6.6 0 0 1-.6-.6V15.6h-.2v5.8c0 .3-.3.6-.6.6H3.4a.6.6 0 0 1-.6-.6V15H0V9.4C0 8.6.6 8 1.4 8Z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="BAS, ir al inicio"><img src="img/logo-blanco-a.webp" alt="" width="30" height="29">BAS</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span></button>
+    <nav class="menu" id="menu" aria-label="Secciones">
+      <a href="#proyecto">Proyecto</a>
+      <a href="#ortesis">Órtesis</a>
+      <a href="#protesis">Prótesis</a>
+      <a href="#probalo">Probalo vos</a>
+      <a href="#app">App</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#quien">¿A quién le sirve?</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ INICIO ============ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1><img class="hero-logo" src="img/logo-blanco-a.webp" alt="" width="400" height="385">BAS</h1>
+      <p class="sub">Sistemas de asistencia biónica</p>
+      <p class="award">Proyecto ganador en el certamen de innovación tecnológica/técnica en la Expo industria “Hecho en Merlo 2025” y reconocido en el senado nacional con un diploma de honor.</p>
+      <div class="hero-cta">
+        <a class="btn btn-white" href="#probalo">Probá cómo funciona</a>
+        <a class="btn btn-line" href="#proyecto">Conocer el proyecto</a>
+      </div>
+    </div>
+    <figure class="hero-fig">
+      <img src="img/ortesis-guante.webp" width="558" height="1346" alt="Guante de rehabilitación BAS con anillos 3D y los servomotores en el antebrazo">
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PROYECTO ============ -->
+<section class="what sec" id="proyecto">
+  <div class="wrap">
+    <h2>¿Qué es BAS?</h2>
+    <p class="def">BAS es un proyecto que desarrolla tecnologías accesibles para la rehabilitación de la mano a través de un guante terapéutico y movilidad tras amputaciones a través de una prótesis biónica.</p>
+    <div class="paths">
+      <a class="path" href="#ortesis">
+        <img src="img/ortesis-guante.webp" loading="lazy" alt="" width="96" height="112">
+        <div><h3>Órtesis: el guante</h3><p>Asiste el movimiento de los dedos para rehabilitar la mano tras un ACV, un traumatismo o una cirugía.</p></div>
+      </a>
+      <a class="path" href="#protesis">
+        <img src="img/protesis-mano.webp" loading="lazy" alt="" width="96" height="112">
+        <div><h3>Prótesis biónica</h3><p>Una mano impresa en 3D que se mueve con la señal eléctrica de los músculos del antebrazo.</p></div>
+      </a>
+    </div>
+    <div class="purpose">
+      <p>El propósito de BAS es democratizar el acceso a tecnologías de apoyo, promoviendo el desarrollo nacional y la inclusión. Buscamos que cada persona pueda recuperar movimiento y calidad de vida.</p>
+      <strong>Innovar para sanar</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACTO ============ -->
+<section class="impact sec" id="impacto">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>El gran obstáculo es el acceso</h2>
+      <p class="lead">Las tecnologías de apoyo suelen ser costosas, importadas o estar solo en clínicas privadas.</p>
+    </div>
+    <div class="impact-card" id="impactCard">
+      <div class="left" style="display:grid;gap:clamp(24px,4vw,36px)">
+        <div class="stat stat-acv">
+          <div class="ring" role="img" aria-label="70 por ciento">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52" fill="none" stroke-width="14"/><circle class="val" id="ringVal" cx="60" cy="60" r="52" fill="none" stroke-width="14" stroke-dasharray="326.7" stroke-dashoffset="326.7"/></svg>
+            <b><span id="n70">0</span>%</b>
+          </div>
+          <div>
+            <p><strong>de los sobrevivientes de un ACV</strong> presentan dificultades motrices en la mano y el brazo. En Argentina se producen entre 50.000 y 60.000 casos por año.</p>
+            <small>Fuente: Sociedad Neurológica Argentina</small>
+          </div>
+        </div>
+        <div class="fact">
+          <strong>Miles de amputaciones por año</strong>
+          <p>En Argentina se realizan miles de amputaciones anuales. Las de la mano son las que más pesan: es la principal herramienta de trabajo.</p>
+          <small>Fuente: UNSAM</small>
+        </div>
+      </div>
+      <div class="access">
+        <h3>Solo entre 3 y 10 de cada 100 pacientes tienen acceso a tecnologías de rehabilitación.</h3>
+        <div class="crowd" id="crowd" aria-hidden="true"></div>
+        <div class="crowd-key">
+          <span><i style="background:var(--indigo)"></i>3 acceden</span>
+          <span><i style="background:#8d92f2"></i>hasta 10 acceden</span>
+          <span><i style="background:var(--tint)"></i>el resto no accede</span>
+        </div>
+        <small style="font-size:.82rem;color:var(--muted)">Estimación de la OMS. El resto queda sin acceso a estos recursos.</small>
+      </div>
+    </div>
+    <div class="awards on-dark">
+      <div class="award-row">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#4fd8ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 8h20v10a10 10 0 0 1-20 0V8Z"/><path d="M14 12H7v3a7 7 0 0 0 7 7M34 12h7v3a7 7 0 0 1-7 7M24 28v8M16 40h16M19 36h10"/></svg>
+        <div><h3>Hecho en Merlo 2025</h3><p>Ganador del certamen de innovación tecnológica/técnica de la Expo Industria.</p></div>
+      </div>
+      <div class="award-row">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#4fd8ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18 24 7l18 11H6ZM10 22v14M19 22v14M29 22v14M38 22v14M6 40h36M8 36h32"/></svg>
+        <div><h3>Senado de la Nación</h3><p>Reconocido con un diploma de honor.</p></div>
+      </div>
+      <div class="award-row">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#4fd8ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="6"/><path d="M24 17v14M17 24h14"/></svg>
+        <div><h3>Consulta clínica</h3><p>Diseño validado con un kinesiólogo del Hospital Municipal Eva Perón.</p></div>
+      </div>
+      <div class="award-row">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#4fd8ff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M8 24h32M24 8c-5 5-5 27 0 32M24 8c5 5 5 27 0 32"/></svg>
+        <div><h3>Contacto con el INTI</h3><p>Para cuidar la ergonomía y la utilidad del diseño.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÓRTESIS ============ -->
+<section class="orte sec" id="ortesis">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Órtesis: el guante de rehabilitación</h2>
+      <p class="lead">Una órtesis es un dispositivo que apoya la función de una parte del cuerpo que sigue siendo propia.</p>
+    </div>
+    <div class="orte-grid">
+      <div class="copy">
+        <p>La órtesis robótica de BAS es un guante terapéutico que asiste el movimiento de los dedos de personas con movilidad reducida en la mano.</p>
+        <div class="chips" aria-label="Para quién">
+          <span class="chip">ACV</span><span class="chip">Paresia</span><span class="chip">Lesión del plexo braquial</span><span class="chip">Traumatismos</span><span class="chip">Cirugías</span>
+        </div>
+        <p>Cinco servomotores tiran de hilos que funcionan como tendones artificiales y flexionan cada dedo de forma controlada, uno por uno o todos juntos. Así se pueden repetir con asistencia los movimientos que trabaja la terapia, como abrir, cerrar, agarrar y hacer pinza, para estimular la movilidad, la fuerza y la coordinación.</p>
+        <p>Se maneja desde el celular por Bluetooth. En la app, el profesional define ejercicios, series, repeticiones y descansos, y queda registrado cómo evoluciona cada sesión.</p>
+        <p>BAS no reemplaza al profesional de la salud: complementa la terapia tradicional y permite seguir los ejercicios desde casa.</p>
+      </div>
+      <div class="photo-card">
+        <div class="hot-stage" id="hotStage">
+          <img src="img/ortesis-guante.webp" width="558" height="1346" loading="lazy" alt="Guante BAS visto desde arriba, con los dedos extendidos y los servomotores en el antebrazo">
+          <button class="hot" style="left:51%;top:10.5%" data-i="0" aria-pressed="false" aria-label="Ver anillos 3D"></button>
+          <button class="hot" style="left:39.5%;top:56.5%" data-i="1" aria-pressed="false" aria-label="Ver hilo de tanza"></button>
+          <button class="hot" style="left:37%;top:71%" data-i="2" aria-pressed="false" aria-label="Ver servos"></button>
+        </div>
+        <div class="hot-info" id="hotInfo" aria-live="polite">
+          <h3>Tocá los puntos de la foto</h3>
+          <p>Cada uno muestra una parte del guante y cómo trabaja.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="how">
+      <h3>Cómo funciona</h3>
+      <ol class="flow">
+        <li><div><h4>Se conecta la app</h4><p>La app se vincula por Bluetooth con la placa ESP32 del guante.</p></div></li>
+        <li><div><h4>Se elige el ejercicio</h4><p>El profesional o el paciente selecciona el modo y el movimiento.</p></div></li>
+        <li><div><h4>La placa da la orden</h4><p>La ESP32 le indica a cada servo cuánto tiene que girar.</p></div></li>
+        <li><div><h4>Los dedos se mueven</h4><p>Los servos tiran de los hilos y los dedos se flexionan.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="help">
+      <h3>¿Cómo ayuda en la rehabilitación?</h3>
+      <div class="puzzle">
+        <div class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><circle cx="12" cy="10" r="1.6"/><path d="M6.8 7.2 10.6 9M17.2 8.2 13.4 9.4M12 11.6V15.8"/></svg>
+          <h4>Promueve la neuroplasticidad</h4>
+          <p>Repetir el movimiento asistido contribuye a que el cerebro reorganice sus conexiones con la mano.</p>
+        </div>
+        <div class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.3c1.8 2 5.2 2 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg>
+          <h4>Disminuye la frustración</h4>
+          <p>Completar el movimiento, aunque sea con ayuda, sostiene la motivación durante la terapia.</p>
+        </div>
+        <div class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12V5.5a1.5 1.5 0 0 1 3 0V11M10 11V4a1.5 1.5 0 0 1 3 0v7M13 11V5a1.5 1.5 0 0 1 3 0v7.5M16 11.5V9a1.5 1.5 0 0 1 3 0v6c0 4-3 6.5-6.5 6.5S7 20 5.5 17.5L3.7 14.2a1.5 1.5 0 0 1 2.5-1.6L7 13.8"/></svg>
+          <h4>Mejora la movilidad manual</h4>
+          <p>Ejercicios guiados de apertura y cierre de los dedos, uno por uno o todos juntos.</p>
+        </div>
+        <div class="tile">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7v10M3 9.5v5M18 7v10M21 9.5v5M6 12h12"/></svg>
+          <h4>Aumenta la fuerza y la coordinación</h4>
+          <p>Series y repeticiones que define el profesional y se registran en la app.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRÓTESIS ============ -->
+<section class="prot sec" id="protesis">
+  <div class="wrap">
+    <div class="sec-head on-dark">
+      <h2>Prótesis biónica</h2>
+      <p class="lead">Para personas que sufrieron la amputación de la mano. Aunque falte la mano, los nervios y los músculos del antebrazo siguen enviando señales. La prótesis BAS lee esa señal y la convierte en movimiento.</p>
+      <p class="lead" style="font-weight:500;color:var(--sig)">Bajá despacio y seguí el camino de la señal, desde el cerebro hasta los dedos.</p>
+    </div>
+
+    <div class="story" id="story">
+      <div class="stage-wrap" id="stageWrap">
+        <div class="stage">
+          <div class="rail" id="rail" role="group" aria-label="Pasos del recorrido">
+            <button data-go="1" aria-label="Ir al paso 1"><i></i></button>
+            <button data-go="2" aria-label="Ir al paso 2"><i></i></button>
+            <button data-go="3" aria-label="Ir al paso 3"><i></i></button>
+            <button data-go="4" aria-label="Ir al paso 4"><i></i></button>
+            <button data-go="5" aria-label="Ir al paso 5"><i></i></button>
+            <button data-go="6" aria-label="Ir al paso 6"><i></i></button>
+          </div>
+          <svg class="scene-svg" id="stageSvg" viewBox="0 0 360 300" role="img" aria-label="Ilustración animada del paso que se está leyendo">
+
+            <!-- 1 · cerebro -->
+            <g class="scene on" data-scene="1">
+              <path class="b-fill" d="M92 150C78 118 98 82 134 78C150 52 196 52 214 76C246 74 272 100 262 130C282 150 266 184 238 184C228 204 196 206 180 192C162 208 124 204 116 182C98 186 82 172 92 150Z"/>
+              <path class="b-fill" d="M196 190C214 184 240 192 238 206C236 220 208 224 192 214Z" style="fill:#2c33a8"/>
+              <path d="M172 196 168 246" stroke="#9fa6ff" stroke-width="12" stroke-linecap="round" fill="none"/>
+              <path class="b-fold" d="M134 78C140 96 128 108 142 122M214 76C204 94 214 106 202 124M104 134C124 130 130 146 150 140M182 122C204 126 220 142 240 134M142 122C142 146 130 160 140 178M200 160C214 158 222 168 232 164"/>
+              <path class="cortex glow" d="M168 56C178 84 170 104 182 130"/>
+              <path d="M96 40 150 66" stroke="rgba(255,255,255,.7)" stroke-width="1.2" fill="none"/>
+              <text x="14" y="38">Corteza motora</text>
+              <rect x="222" y="14" width="124" height="30" rx="15" fill="#fff"/>
+              <circle cx="226" cy="54" r="5" fill="#fff"/><circle cx="216" cy="66" r="3" fill="#fff"/>
+              <text x="284" y="33" text-anchor="middle" style="fill:#000046;font-weight:700">Cerrar la mano</text>
+            </g>
+
+            <!-- 2 · neuronas -->
+            <g class="scene" data-scene="2">
+              <path class="neu" d="M52 134C36 118 28 104 16 98M52 134C40 130 28 128 14 130M48 162C34 172 24 186 14 194M62 128C60 108 64 92 58 78M80 172C84 190 80 204 88 222"/>
+              <path class="neu" d="M32 110 20 112M30 188 20 176M60 96 74 90"/>
+              <path id="axon" class="neu" d="M94 150H300"/>
+              <rect class="myelin" x="118" y="140" width="36" height="20" rx="10"/>
+              <rect class="myelin" x="164" y="140" width="36" height="20" rx="10"/>
+              <rect class="myelin" x="210" y="140" width="36" height="20" rx="10"/>
+              <rect class="myelin" x="256" y="140" width="34" height="20" rx="10"/>
+              <path class="neu" d="M300 150 330 124M300 150H334M300 150 330 176"/>
+              <circle cx="333" cy="122" r="5" fill="#aeb4ff"/><circle cx="337" cy="150" r="5" fill="#aeb4ff"/><circle cx="333" cy="178" r="5" fill="#aeb4ff"/>
+              <circle class="soma" cx="70" cy="150" r="26"/><circle cx="70" cy="150" r="10" fill="#aeb4ff"/>
+              <circle class="glow" r="6" fill="#4fd8ff"><animateMotion dur="1.8s" repeatCount="indefinite" calcMode="linear"><mpath href="#axon"/></animateMotion></circle>
+              <circle class="glow" r="6" fill="#4fd8ff"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" calcMode="linear"><mpath href="#axon"/></animateMotion></circle>
+              <text x="70" y="252" text-anchor="middle">Neurona</text>
+              <text class="sig-t" x="200" y="112" text-anchor="middle">Señal eléctrica</text>
+              <text x="200" y="196" text-anchor="middle" class="lbl">La orden viaja por el axón</text>
+            </g>
+
+            <!-- 3 · médula -->
+            <g class="scene" data-scene="3">
+              <g>
+                <rect class="vert" x="88" y="24" width="44" height="20" rx="7"/><rect class="vert" x="88" y="50" width="44" height="20" rx="7"/>
+                <rect class="vert" x="88" y="76" width="44" height="20" rx="7"/><rect class="vert" x="88" y="102" width="44" height="20" rx="7"/>
+                <rect class="vert" x="88" y="128" width="44" height="20" rx="7"/><rect class="vert" x="88" y="154" width="44" height="20" rx="7"/>
+                <rect class="vert" x="88" y="180" width="44" height="20" rx="7"/><rect class="vert" x="88" y="206" width="44" height="20" rx="7"/>
+              </g>
+              <path class="cord" d="M110 12V232"/>
+              <path class="nerve" d="M110 196C170 196 190 150 250 140S320 130 340 150"/>
+              <path id="spinePath" d="M110 14V196C170 196 190 150 250 140S320 130 340 150" fill="none"/>
+              <circle class="glow" r="7" fill="#4fd8ff"><animateMotion dur="3.4s" repeatCount="indefinite" calcMode="linear"><mpath href="#spinePath"/></animateMotion></circle>
+              <text x="150" y="64">Médula espinal</text>
+              <text class="sig-t" x="168" y="108">Hacia los músculos del brazo</text>
+            </g>
+
+            <!-- 4 · músculo -->
+            <g class="scene" data-scene="4">
+              <path d="M6 150H30M330 150H354" stroke="#c9cdff" stroke-width="5" stroke-linecap="round"/>
+              <g class="muscle">
+                <path class="fiber" d="M30 150C70 100 130 92 180 92C230 92 290 100 330 150C290 200 230 208 180 208C130 208 70 200 30 150Z"/>
+                <path class="fiber-ln" d="M44 150C100 128 260 128 316 150M52 132C110 118 250 118 308 132M52 168C110 182 250 182 308 168M70 114C120 104 240 104 290 114M70 186C120 196 240 196 290 186"/>
+              </g>
+              <path class="glow" d="M188 12 168 46H182L174 74 200 38H185Z" fill="#4fd8ff"/>
+              <path d="M240 70H262L270 36 280 86 288 70H318" fill="none" stroke="#4fd8ff" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="130" stroke-dashoffset="130"><animate attributeName="stroke-dashoffset" values="130;0;0;130" keyTimes="0;.35;.8;1" dur="2.8s" repeatCount="indefinite"/></path>
+              <g class="ions">
+                <circle class="ion" r="5" cx="70" cy="60"><animate attributeName="cy" values="58;58;122;122" keyTimes="0;.15;.5;1" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;1;0;0" keyTimes="0;.15;.5;.62;1" dur="2.8s" repeatCount="indefinite"/></circle>
+                <circle class="ion" r="5" cx="108" cy="56"><animate attributeName="cy" values="52;52;116;116" keyTimes="0;.22;.56;1" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;1;0;0" keyTimes="0;.22;.56;.68;1" dur="2.8s" repeatCount="indefinite"/></circle>
+                <circle class="ion" r="5" cx="48" cy="70"><animate attributeName="cy" values="74;74;128;128" keyTimes="0;.28;.6;1" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;1;0;0" keyTimes="0;.28;.6;.72;1" dur="2.8s" repeatCount="indefinite"/></circle>
+              </g>
+              <text x="14" y="22">Iones entran a</text><text x="14" y="37">la fibra muscular</text>
+              <text class="sig-t" x="279" y="22" text-anchor="middle" style="font-size:10.5px">Potencial de acción</text>
+              <text x="180" y="258" text-anchor="middle">El músculo se acorta y se engrosa</text>
+            </g>
+
+            <!-- 5 · sensor -->
+            <g class="scene" data-scene="5" id="scene5">
+              <rect class="board" x="100" y="12" width="160" height="36" rx="8"/>
+              <text x="180" y="35" text-anchor="middle" style="font-weight:700">Muscle Sensor v3</text>
+              <path d="M130 48V74M180 48V74M240 48V74" stroke="#dfe2ff" stroke-width="2" fill="none"/>
+              <rect class="skin" x="40" y="80" width="280" height="24" rx="6"/>
+              <rect x="40" y="104" width="280" height="46" rx="6" fill="#b8405f"/>
+              <path class="fiber-ln" d="M48 116H312M48 128H312M48 140H312"/>
+              <path class="field glow" d="M130 108C140 140 170 140 180 108"/>
+              <path class="field glow" d="M120 108C132 150 178 150 190 108" style="animation-delay:.2s"/>
+              <circle class="elec" cx="130" cy="80" r="8"/><circle class="elec" cx="180" cy="80" r="8"/><circle class="elec ref" cx="240" cy="80" r="8"/>
+              <text class="lbl" x="155" y="165" text-anchor="middle" style="font-size:10px">miden</text>
+              <text class="lbl" x="240" y="165" text-anchor="middle" style="font-size:10px">referencia</text>
+              <rect class="scope" x="24" y="172" width="312" height="116" rx="10"/>
+              <text class="lbl" x="36" y="190" style="font-size:10.5px">Señal amplificada (microvoltios)</text>
+              <line class="thr" x1="30" x2="330" y1="244" y2="244"/>
+              <text class="lbl" x="34" y="238" style="font-size:10px">umbral</text>
+              <polyline class="trace" id="trace" points=""/>
+              <g id="flag" style="opacity:0;transition:opacity .2s"><rect x="248" y="178" width="80" height="22" rx="11" fill="#4fd8ff"/><text x="288" y="193" text-anchor="middle" style="fill:#000046;font-weight:700;font-size:11px">¡Hay señal!</text></g>
+            </g>
+
+            <!-- 6 · mano -->
+            <g class="scene" data-scene="6" id="scene6">
+              <rect class="board" x="10" y="14" width="124" height="34" rx="8"/>
+              <text x="72" y="35" text-anchor="middle" style="font-size:10.5px;font-weight:700">Muscle Sensor v3</text>
+              <path class="wire" d="M72 50V104"/>
+              <rect class="ard" x="10" y="106" width="124" height="74" rx="9"/>
+              <text x="72" y="138" text-anchor="middle" style="font-weight:700">Arduino UNO</text>
+              <text class="lbl" x="72" y="156" text-anchor="middle" style="font-size:10px">interpreta la señal</text>
+              <path class="wire" d="M134 143H146V238H210"/>
+              <text class="lbl" x="72" y="214" text-anchor="middle" style="font-size:10.5px">Giro de los servos</text>
+              <text class="sig-t" id="angleTxt" x="72" y="246" text-anchor="middle" style="font-size:26px;font-weight:700">0°</text>
+              <svg id="stageHand" x="150" y="0" width="200" height="270" viewBox="0 0 200 270"></svg>
+            </g>
+          </svg>
+          <p class="cap" id="cap" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="steps" id="steps">
+        <article class="step cur" data-step="1">
+          <span class="n">1</span>
+          <h3>El cerebro decide el movimiento</h3>
+          <p>Todo empieza cuando la persona decide, por ejemplo, cerrar la mano. La corteza motora, en el lóbulo frontal, planifica y controla los movimientos voluntarios.</p>
+        </article>
+        <article class="step" data-step="2">
+          <span class="n">2</span>
+          <h3>Las neuronas envían la orden</h3>
+          <p>Las neuronas reciben, procesan y transmiten información con señales químicas y eléctricas. Mandan una orden eléctrica hacia el cuerpo.</p>
+        </article>
+        <article class="step" data-step="3">
+          <span class="n">3</span>
+          <h3>Viaja por la médula espinal</h3>
+          <p>La médula conecta el cerebro con el resto del cuerpo y lleva la orden hasta los músculos del brazo.</p>
+        </article>
+        <article class="step" data-step="4">
+          <span class="n">4</span>
+          <h3>El músculo se contrae</h3>
+          <p>Un intercambio de iones en las células musculares provoca la contracción y una pequeña descarga: el potencial de acción.</p>
+        </article>
+        <article class="step" data-step="5">
+          <span class="n">5</span>
+          <h3>Aparece la señal mioeléctrica</h3>
+          <p>Todas las fibras contrayéndose a la vez crean un campo eléctrico muy débil, del orden de los microvoltios. El Muscle Sensor v3 la capta con electrodos sobre la piel, dos miden y uno es de referencia para limpiar el ruido, y la amplifica.</p>
+        </article>
+        <article class="step" data-step="6">
+          <span class="n">6</span>
+          <h3>La mano se cierra o se abre</h3>
+          <p>El Arduino UNO interpreta la señal y manda a los servos un giro de 0° a 180°. Con cada contracción, la mano alterna entre cerrar y abrir.</p>
+          <div class="logic" aria-label="Lógica del programa">
+            <span>Leer sensor</span><b aria-hidden="true"><svg width="16" height="10"><use href="#arr"/></svg></b>
+            <span class="q">¿Hay señal?</span><b aria-hidden="true"><svg width="16" height="10"><use href="#arr"/></svg></b>
+            <span>Cerrar o abrir la mano</span>
+          </div>
+          <p style="font-size:.9rem;color:rgba(255,255,255,.7)">Si no hay señal, espera y vuelve a leer el sensor.</p>
+          <a class="btn btn-white" href="#probalo" style="justify-self:start;margin-top:10px">Probalo vos</a>
+        </article>
+      </div>
+    </div>
+
+    <div class="prot-extra on-dark">
+      <div class="gallery">
+        <figure><img src="img/protesis-mano.webp" loading="lazy" width="560" height="952" alt="Prótesis BAS: mano azul impresa en 3D con la palabra BAS en el dorso"><figcaption>La mano, impresa en 3D.</figcaption></figure>
+        <figure><img src="img/protesis-servos.webp" loading="lazy" width="640" height="847" alt="Servomotores montados dentro del antebrazo de la prótesis, con los hilos hacia los dedos"><figcaption>Los servos, en el antebrazo, tiran de los hilos.</figcaption></figure>
+      </div>
+      <ul class="adv">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Imita el control biológico: la mueve la intención del propio músculo.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Solución viable, hecha con componentes accesibles.</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg>Simple mantenimiento y reparación.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBALO VOS ============ -->
+<section class="try sec" id="probalo">
+  <div class="wrap">
+    <div class="sec-head on-dark">
+      <h2>Probalo vos</h2>
+      <p class="lead">Una simulación de los dos sistemas. Controlá la mano con la app del guante o con la señal de un músculo.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Qué querés probar">
+      <button role="tab" id="tabG" aria-selected="true" aria-controls="panG">Guante con app</button>
+      <button role="tab" id="tabP" aria-selected="false" aria-controls="panP" tabindex="-1">Prótesis con músculo</button>
+    </div>
+    <div class="sim">
+      <div class="sim-hand">
+        <svg class="hand glove" id="simHand" role="img" aria-label="Mano simulada que se mueve según lo que toques"></svg>
+        <div class="angles" id="angles" aria-live="off">
+          <div>Pulgar<b>0°</b></div><div>Índice<b>0°</b></div><div>Medio<b>0°</b></div><div>Anular<b>0°</b></div><div>Meñique<b>0°</b></div>
+        </div>
+        <p class="sim-note">Cada dedo lo mueve un servomotor de 0° a 180°.</p>
+      </div>
+
+      <div>
+        <div class="panel" id="panG" role="tabpanel" aria-labelledby="tabG">
+          <div class="phone" id="phone">
+            <div class="phone-bar"><span><i></i>BAS conectado</span><span>Modos</span></div>
+            <div class="phone-body">
+              <div class="who">PACIENTE<b>Paciente de ejemplo</b></div>
+              <div class="modes" role="tablist" aria-label="Modos de la app" id="modes">
+                <button role="tab" data-mode="std" aria-selected="true">Estándar</button>
+                <button role="tab" data-mode="grip" aria-selected="false">Agarre</button>
+                <button role="tab" data-mode="pinch" aria-selected="false">Pinza</button>
+                <button role="tab" data-mode="gest" aria-selected="false">Gestos</button>
+                <button role="tab" data-mode="seq" aria-selected="false">Secuencias</button>
+              </div>
+
+              <div class="mode-pane" data-pane="std">
+                <div class="fgrid" id="fingerBtns">
+                  <button class="fbtn" data-f="0" aria-pressed="false">Pulgar</button>
+                  <button class="fbtn" data-f="1" aria-pressed="false">Índice</button>
+                  <button class="fbtn" data-f="2" aria-pressed="false">Medio</button>
+                  <button class="fbtn" data-f="3" aria-pressed="false">Anular</button>
+                  <button class="fbtn full" data-f="4" aria-pressed="false">Meñique</button>
+                </div>
+                <button class="fbtn all" id="allBtn" aria-pressed="false">Mover todos</button>
+                <p class="hint2">Tocá un dedo para cerrarlo o abrirlo.</p>
+              </div>
+
+              <div class="mode-pane" data-pane="grip" hidden>
+                <label class="rng-l" for="gripRng"><span>Fuerza de agarre</span><span id="gripVal">120°</span></label>
+                <input class="rng" id="gripRng" type="range" min="0" max="180" value="120">
+                <p class="hint2">Mueve todos los dedos a la vez hasta el ángulo que elijas.</p>
+              </div>
+
+              <div class="mode-pane" data-pane="pinch" hidden>
+                <p class="hint2">El pulgar hace pinza con el dedo que elijas.</p>
+                <div class="sel" id="pinchSel">
+                  <button data-p="1" aria-pressed="false">Índice</button>
+                  <button data-p="2" aria-pressed="false">Medio</button>
+                  <button data-p="3" aria-pressed="false">Anular</button>
+                  <button data-p="4" aria-pressed="false">Meñique</button>
+                </div>
+              </div>
+
+              <div class="mode-pane" data-pane="gest" hidden>
+                <p class="hint2">Gestos programados.</p>
+                <div class="sel" id="gestSel">
+                  <button data-g="point" aria-pressed="false">Señalar</button>
+                  <button data-g="peace" aria-pressed="false">Paz</button>
+                  <button data-g="thumb" aria-pressed="false">Pulgar arriba</button>
+                  <button data-g="rock" aria-pressed="false">Rock</button>
+                </div>
+              </div>
+
+              <div class="mode-pane" data-pane="seq" hidden>
+                <p class="hint2">Ejecuta varios gestos seguidos de forma automática.</p>
+                <button class="fbtn all" id="seqBtn" aria-pressed="false">Iniciar secuencia</button>
+                <p class="hint2" id="seqNow" aria-live="polite">Detenida.</p>
+              </div>
+
+              <button class="fbtn off" id="pwr" aria-pressed="true">ON / OFF</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" id="panP" role="tabpanel" aria-labelledby="tabP" hidden>
+          <div class="muscle-ui">
+            <p>La prótesis no usa botones: la mueve la contracción de un músculo del antebrazo. Mantené apretado para contraer y mirá cómo cambia la señal.</p>
+            <div class="meter">
+              <div class="t"><span>Nivel de señal</span><b id="sigTxt">en reposo</b></div>
+              <svg id="meterSvg" viewBox="0 0 320 110" role="img" aria-label="Gráfico de la señal muscular en tiempo real">
+                <line x1="0" x2="320" y1="55" y2="55" stroke="#fff" stroke-width="1.4" stroke-dasharray="6 6" opacity=".85"/>
+                <text x="316" y="49" text-anchor="end" style="font-family:var(--font);font-size:10px;fill:#fff">umbral</text>
+                <polyline id="meterLine" points="" fill="none" stroke="#4fd8ff" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button class="press" id="press">Mantené apretado para contraer el músculo</button>
+            <div class="logic2" id="logic2" aria-label="Lógica del programa">
+              <span data-l="1">Leer sensor</span><b aria-hidden="true"><svg width="16" height="10" style="stroke:var(--muted)"><use href="#arr"/></svg></b>
+              <span data-l="2">¿Hay señal?</span><b aria-hidden="true"><svg width="16" height="10" style="stroke:var(--muted)"><use href="#arr"/></svg></b>
+              <span data-l="3">Cerrar o abrir la mano</span>
+            </div>
+            <p class="count">Contracciones detectadas: <b id="cnt">0</b>. Con cada una, la mano alterna entre cerrar y abrir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<section class="app sec" id="app">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>La app BAS</h2>
+      <p class="lead">Se conecta al guante por Bluetooth y va mucho más allá de abrir y cerrar la mano.</p>
+    </div>
+    <div class="app-grid">
+      <div class="app-visual">
+        <figure id="figApp"><img src="img/app-bas.webp" width="420" height="903" loading="lazy" alt="Pantalla de la app BAS con botones por dedo, Mover todos y ON/OFF"></figure>
+        <figure id="figRep" hidden><img src="img/reporte-clinico.webp" width="760" height="900" loading="lazy" alt="Reporte clínico generado por la app BAS con el historial de rehabilitación"></figure>
+      </div>
+      <div>
+        <div class="tabs light" role="tablist" aria-label="Qué mostrar de la app" id="appTabs">
+          <button role="tab" data-t="app" aria-selected="true">Control del guante</button>
+          <button role="tab" data-t="rep" aria-selected="false">Reporte clínico</button>
+        </div>
+        <ul class="feat" id="featApp">
+          <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 12V5.5a1.5 1.5 0 0 1 3 0V11M10 11V4a1.5 1.5 0 0 1 3 0v7M13 11V5a1.5 1.5 0 0 1 3 0v7.5M16 11.5V9a1.5 1.5 0 0 1 3 0v6c0 4-3 6.5-6.5 6.5S7 20 5.5 17.5L3.7 14.2a1.5 1.5 0 0 1 2.5-1.6L7 13.8"/></svg></span><div><h4>Control por dedos</h4><p>Pulgar, índice, medio, anular y meñique: cada dedo se abre o se cierra por separado.</p></div></li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M4 12l4-4M4 12l4 4M20 12l-4-4M20 12l-4 4"/></svg></span><div><h4>Mover todos</h4><p>Un solo botón para abrir o cerrar la mano completa.</p></div></li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8M6.6 6.6a8 8 0 1 0 10.8 0"/></svg></span><div><h4>ON / OFF</h4><p>Enciende o apaga el guante en cualquier momento.</p></div></li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="7" height="7" rx="2"/><rect x="14" y="4" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><div><h4>Cinco modos</h4><p>Estándar, agarre, pinza, gestos y secuencias: desde mover un dedo hasta repetir una serie de gestos.</p></div></li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4M16 3v4M4 10h16M9 15l2 2 4-4"/></svg></span><div><h4>Agenda de rehabilitación</h4><p>El especialista registra ejercicios, repeticiones, descansos y observaciones, y configura recordatorios.</p></div></li>
+        </ul>
+        <div id="featRep" hidden>
+          <p class="lead" style="margin-top:6px;margin-bottom:18px">La app arma un reporte para el especialista con el historial de cada sesión.</p>
+          <ul class="feat">
+            <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5"/></svg></span><div><h4>Notas clínicas</h4><p>Las observaciones y el diagnóstico del especialista.</p></div></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.2 8 8 9 4.8-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><div><h4>Calibración de seguridad</h4><p>El punto de reposo y la fuerza máxima permitida.</p></div></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span><div><h4>Resumen de rendimiento</h4><p>Cuántos ejercicios se completaron en la sesión.</p></div></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h4>Historial de rehabilitación</h4><p>Ejercicio, series y repeticiones, velocidad, descanso y estado de cada sesión.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPONENTES ============ -->
+<section class="comp sec" id="componentes">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Lo que hay por dentro</h2>
+      <p class="lead">Cada pieza se eligió para que funcione, cueste poco y se consiga fácil.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar componentes">
+      <button data-f="all" aria-pressed="true">Todos</button>
+      <button data-f="ortesis" aria-pressed="false">Órtesis</button>
+      <button data-f="protesis" aria-pressed="false">Prótesis</button>
+      <button data-f="placa" aria-pressed="false">Placa</button>
+    </div>
+    <div class="cards" id="cards">
+      <article class="card" data-cat="ortesis placa"><div class="im"><img src="img/esp32.webp" loading="lazy" width="700" height="414" alt="Placa ESP32"></div><div class="tx"><span class="tag">Órtesis</span><h3>ESP32</h3><p>Placa principal del guante. Con Bluetooth y Wi-Fi integrados, recibe las órdenes de la app y le indica a cada servo cuánto girar.</p></div></article>
+      <article class="card" data-cat="protesis placa"><div class="im"><img src="img/arduino-uno.webp" loading="lazy" width="700" height="577" alt="Placa Arduino UNO"></div><div class="tx"><span class="tag p">Prótesis</span><h3>Arduino UNO</h3><p>Placa principal de la prótesis. Lee la señal del Muscle Sensor v3 y decide cuándo los servos cierran o abren la mano.</p></div></article>
+      <article class="card" data-cat="ortesis"><div class="im"><img src="img/servo-mg90s.webp" loading="lazy" width="560" height="512" alt="Servomotor MG90S"></div><div class="tx"><span class="tag">Órtesis</span><h3>Servo MG90S</h3><p>Mueve cada dedo del guante: gira de 0° a 180° y tira del hilo. Tiene engranajes metálicos, más resistentes al desgaste.</p></div></article>
+      <article class="card" data-cat="protesis"><div class="im"><img src="img/servo-sg90.webp" loading="lazy" width="560" height="459" alt="Servomotor SG90"></div><div class="tx"><span class="tag p">Prótesis</span><h3>Servo SG90</h3><p>Mueve cada dedo de la prótesis. Es liviano y compacto, y tira de los hilos desde el antebrazo.</p></div></article>
+      <article class="card" data-cat="protesis"><div class="im"><img src="img/muscle-sensor-v3.webp" loading="lazy" width="760" height="643" alt="Muscle Sensor v3 con sus cables y electrodos"></div><div class="tx"><span class="tag p">Prótesis</span><h3>Muscle Sensor v3</h3><p>Detecta la actividad eléctrica del músculo al contraerse (electromiografía). Con tres electrodos sobre la piel, dos que miden y uno de referencia, capta una señal de microvoltios y la amplifica para que la placa pueda leerla.</p></div></article>
+      <article class="card" data-cat="protesis placa"><div class="im"><img src="img/fuente-5v.webp" loading="lazy" width="700" height="528" alt="Plaqueta de la fuente de 5 volts"></div><div class="tx"><span class="tag p">Prótesis</span><h3>Fuente de 5 V</h3><p>Plaqueta que alimenta a los cinco servos de la prótesis.</p></div></article>
+      <article class="card" data-cat="protesis placa"><div class="im"><img src="img/fuente-partida.webp" loading="lazy" width="700" height="524" alt="Plaqueta de la fuente partida"></div><div class="tx"><span class="tag p">Prótesis</span><h3>Fuente partida</h3><p>Plaqueta que alimenta el sensor muscular, que necesita una tensión positiva y una negativa.</p></div></article>
+      <article class="card" data-cat="ortesis protesis"><div class="im"><img src="img/tanza.webp" loading="lazy" width="225" height="188" alt="Rollo de hilo de tanza"></div><div class="tx"><span class="tag b">Ambos</span><h3>Hilo de tanza</h3><p>Actúa como tendón artificial: va desde cada dedo hasta su servo.</p></div></article>
+      <article class="card" data-cat="ortesis"><div class="im"><img src="img/polea.webp" loading="lazy" width="251" height="249" alt="Polea azul impresa en 3D con doble anclaje"></div><div class="tx"><span class="tag">Órtesis</span><h3>Polea con doble anclaje</h3><p>Pieza impresa en 3D que se monta en cada servo y recibe el hilo.</p></div></article>
+      <article class="card" data-cat="ortesis"><div class="im"><img src="img/pulsera.webp" loading="lazy" width="437" height="468" alt="Pulsera azul impresa en 3D"></div><div class="tx"><span class="tag">Órtesis</span><h3>Pulsera 3D</h3><p>Impresa en PLA, sostiene los servos en el antebrazo.</p></div></article>
+    </div>
+    <div class="struct">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="m24 6 15 8.5v17L24 40 9 31.5v-17zM9 14.5 24 23l15-8.5M24 23v17"/></svg>
+      <p>La estructura de los dos sistemas se imprime en 3D con filamento PLA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ A QUIÉN LE SIRVE ============ -->
+<section class="who-sec sec" id="quien">
+  <div class="wrap">
+    <div class="sec-head on-dark">
+      <h2>¿A quién le sirve?</h2>
+    </div>
+    <div class="users">
+      <article class="user">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M6 30h10l5-12 8 22 6-14 3 4h12"/><rect x="4" y="8" width="48" height="40" rx="8"/></svg>
+        <div><h3>Centros de kinesiología</h3><p>Suman una herramienta accesible para las sesiones y para que cada paciente siga los ejercicios en casa.</p></div>
+      </article>
+      <article class="user">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M10 50V16l18-8 18 8v34zM4 50h48M24 22h8M28 18v8M20 34h4v16h-4zM32 34h4v16h-4z"/></svg>
+        <div><h3>Hospitales públicos o privados</h3><p>Incorporan tecnología de apoyo de bajo costo, simple de mantener y de reparar.</p></div>
+      </article>
+      <article class="user">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="17" r="9"/><path d="M10 50c0-10 8-17 18-17s18 7 18 17"/></svg>
+        <div><h3>Clientes individuales</h3><p>Personas que necesitan rehabilitar o reemplazar la mano y buscan una opción a su alcance.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EQUIPO ============ -->
+<section class="team sec" id="equipo">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>El equipo</h2>
+      <p class="lead">Estudiantes de 6° 2°, con el objetivo de crear soluciones inclusivas y seguras.</p>
+    </div>
+    <div class="people">
+      <article class="person"><i aria-hidden="true">BB</i><h3>Bianca Zamira Brandan</h3></article>
+      <article class="person"><i aria-hidden="true">TS</i><h3>Thiago Santos Faranca</h3></article>
+      <article class="person"><i aria-hidden="true">AT</i><h3>Azul Agostina Teijo</h3></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contact sec" id="contacto">
+  <div class="wrap">
+    <div>
+      <h2 class="big" style="max-width:none">Innovar para sanar</h2>
+      <p class="lead">¿Querés conocer más, colaborar o invitarnos a presentar BAS? Escribinos.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:basproyecto@gmail.com"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 8 8 6 8-6"/></svg></span><span><small>Mail</small>basproyecto@gmail.com</span></a>
+      <a href="https://www.instagram.com/bas.proyecto/" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></svg></span><span><small>Instagram</small>@bas.proyecto</span></a>
+      <a href="https://wa.me/5491141856284" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-1 .8c-.9-.4-1.7-1.200-2.100-2.100l.8-1-1-2z"/></svg></span><span><small>WhatsApp</small>11 4185-6284</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f1"><img src="img/logo-blanco-a.webp" alt="" width="34" height="33"><span>BAS, Sistemas de asistencia biónica</span></div>
+    <span>© 2026 BAS. Proyecto de 6° 2°.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS = 'http://www.w3.org/2000/svg';
+const svgEl = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const rad = d => d * Math.PI / 180;
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* ---------- menú ---------- */
+const topBar = $('#top'), menu = $('#menu'), mb = $('#menuBtn');
+const onScroll = () => topBar.classList.toggle('solid', scrollY > 30);
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+function setMenu(o) {
+  menu.classList.toggle('open', o);
+  mb.setAttribute('aria-expanded', o);
+  mb.setAttribute('aria-label', o ? 'Cerrar menú' : 'Abrir menú');
+  document.body.classList.toggle('lock', o);
+}
+mb.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+const links = $$('#menu a');
+const spy = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(l => l.removeAttribute('aria-current'));
+    const l = links.find(a => a.getAttribute('href') === '#' + e.target.id);
+    if (l) l.setAttribute('aria-current', 'true');
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+links.forEach(a => { const s = $(a.getAttribute('href')); if (s) spy.observe(s); });
+
+/* ---------- tabs accesibles ---------- */
+function tabs(list, onSel) {
+  const bt = $$('[role=tab]', list);
+  function sel(i) {
+    bt.forEach((b, k) => { b.setAttribute('aria-selected', k === i); b.tabIndex = k === i ? 0 : -1; });
+    onSel(i, bt[i]);
+  }
+  bt.forEach((b, i) => {
+    b.addEventListener('click', () => sel(i));
+    b.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const j = (i + (e.key === 'ArrowRight' ? 1 : -1) + bt.length) % bt.length;
+      sel(j); bt[j].focus(); e.preventDefault();
+    });
+  });
+  return sel;
+}
+
+/* ---------- impacto ---------- */
+const crowd = $('#crowd');
+for (let i = 0; i < 100; i++) { const s = svgEl('svg', { viewBox: '0 0 10 22' }, crowd); svgEl('use', { href: '#pp' }, s); }
+let impactDone = false;
+function runImpact() {
+  const ring = $('#ringVal'), n = $('#n70'), C = 326.7;
+  if (reduce) { ring.style.strokeDashoffset = C * .3; n.textContent = 70; }
+  else {
+    requestAnimationFrame(() => { ring.style.strokeDashoffset = C * .3; });
+    const t0 = performance.now();
+    (function f(t) { const p = Math.min(1, (t - t0) / 1600); n.textContent = Math.round(70 * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); })(t0);
+  }
+  $$('svg', crowd).slice(0, 10).forEach((s, i) => setTimeout(() => s.classList.add(i < 3 ? 'a' : 'b'), reduce ? 0 : 300 + i * 110));
+}
+new IntersectionObserver((es, o) => {
+  if (es[0].isIntersecting && !impactDone) { impactDone = true; o.disconnect(); runImpact(); }
+}, { threshold: .3 }).observe($('#impactCard'));
+
+/* ---------- órtesis: puntos de la foto ---------- */
+const HOT = [
+  ['Anillos 3D', 'Impresos en PLA, se colocan en las falanges. Guían el hilo y reparten la tracción en cada articulación para que el dedo se flexione de forma natural.'],
+  ['Hilo de tanza', 'Actúa como tendón artificial: va desde cada dedo hasta su servo. Cuando el servo gira, tira del hilo y el dedo se flexiona.'],
+  ['Servos MG90S', 'Hay uno por dedo, en la base del antebrazo. Cada uno gira de 0° a 180° según lo que se pida desde la app.']
+];
+$$('.hot').forEach(b => b.addEventListener('click', () => {
+  $$('.hot').forEach(x => x.setAttribute('aria-pressed', 'false'));
+  b.setAttribute('aria-pressed', 'true');
+  const info = $('#hotInfo'); info.textContent = '';
+  const h = document.createElement('h3'), p = document.createElement('p');
+  h.textContent = HOT[b.dataset.i][0]; p.textContent = HOT[b.dataset.i][1];
+  info.append(h, p);
+}));
+
+/* ---------- mano (compartida) ---------- */
+const FING = [null,
+  { b: [70, 122], L: [34, 24, 20], w: 17, sp: -5 },
+  { b: [95, 115], L: [38, 27, 22], w: 17, sp: -1 },
+  { b: [120, 121], L: [35, 24, 20], w: 16, sp: 4 },
+  { b: [143, 135], L: [27, 19, 15], w: 14, sp: 10 }];
+const TH = { b: [60, 176], L: [30, 24], w: 18 };
+const SERVO_X = [76, 92, 108, 124, 140];
+const hands = [];
+
+function createHand(svg) {
+  svg.setAttribute('viewBox', '0 0 200 270');
+  svg.textContent = '';
+  const g = svgEl('g', {}, svg);
+  svgEl('path', { class: 'h-arm', d: 'M68 206h76l8 64H60z' }, g);
+  svgEl('path', { class: 'h-palm', d: 'M54 152C54 130 62 118 76 118L142 126C156 128 160 140 158 154L153 198C151 213 139 220 123 220H88C70 220 60 208 58 192Z' }, g);
+  svgEl('text', { class: 'h-logo', x: 106, y: 190, 'text-anchor': 'middle' }, g).textContent = 'BAS';
+  const sg = svgEl('g', {}, g);
+  const servos = [];
+  for (let i = 0; i < 5; i++) {
+    const x = SERVO_X[i];
+    const str = svgEl('line', { class: 'string', x1: x, y1: 233, x2: x, y2: 120 }, sg);
+    svgEl('rect', { class: 'servo', x: x - 6, y: 228, width: 12, height: 19, rx: 2 }, g);
+    const horn = svgEl('line', { class: 'horn', x1: x, y1: 233, x2: x + 9, y2: 233 }, g);
+    servos.push({ x, str, horn });
+  }
+  const fingers = [];
+  for (const i of [4, 3, 2, 1]) {
+    const F = FING[i], segs = [];
+    for (let k = 0; k < 3; k++) {
+      const grp = svgEl('g', {}, g);
+      const e = svgEl('line', { class: 'seg-edge', 'stroke-width': F.w + 4 }, grp);
+      const fl = svgEl('line', { class: 'seg-fill', 'stroke-width': F.w }, grp);
+      const ring = k < 2 ? svgEl('line', { class: 'ring-b', 'stroke-width': F.w + 3 }, grp) : null;
+      segs.push({ e, fl, ring });
+    }
+    fingers[i] = { F, segs };
+  }
+  const tseg = [];
+  for (let k = 0; k < 2; k++) {
+    const grp = svgEl('g', {}, g);
+    const e = svgEl('line', { class: 'seg-edge', 'stroke-width': TH.w + 4 }, grp);
+    const fl = svgEl('line', { class: 'seg-fill', 'stroke-width': TH.w }, grp);
+    const ring = k === 0 ? svgEl('line', { class: 'ring-b', 'stroke-width': TH.w + 3 }, grp) : null;
+    tseg.push({ e, fl, ring });
+  }
+  const setL = (el, x1, y1, x2, y2) => { el.setAttribute('x1', x1.toFixed(1)); el.setAttribute('y1', y1.toFixed(1)); el.setAttribute('x2', x2.toFixed(1)); el.setAttribute('y2', y2.toFixed(1)); };
+  const H = { svg, cur: [0, 0, 0, 0, 0], tgt: [0, 0, 0, 0, 0], dirty: true, onChange: null, tips: [] };
+
+  function pose(a) {
+    for (let i = 1; i <= 4; i++) {
+      const { F, segs } = fingers[i], t = a[i] / 180;
+      const joints = [rad(t * 85), rad(t * 95), rad(t * 65)];
+      let x = F.b[0], y = F.b[1], c = 0;
+      const sp = Math.sin(rad(F.sp));
+      for (let k = 0; k < 3; k++) {
+        c += joints[k];
+        const nx = x + F.L[k] * sp * Math.cos(c), ny = y - F.L[k] * Math.cos(c);
+        const s = segs[k];
+        setL(s.e, x, y, nx, ny); setL(s.fl, x, y, nx, ny);
+        if (s.ring) setL(s.ring, lerp(x, nx, .5), lerp(y, ny, .5), lerp(x, nx, .72), lerp(y, ny, .72));
+        x = nx; y = ny;
+      }
+      H.tips[i] = [x, y];
+    }
+    const t = a[0] / 180, ph = rad(-48 + 78 * t), ph2 = rad(-48 + 78 * t + 28 * t), s = 1 - .22 * t;
+    const p1 = [TH.b[0] + TH.L[0] * s * Math.sin(ph), TH.b[1] - TH.L[0] * s * Math.cos(ph)];
+    const p2 = [p1[0] + TH.L[1] * s * Math.sin(ph2), p1[1] - TH.L[1] * s * Math.cos(ph2)];
+    setL(tseg[0].e, TH.b[0], TH.b[1], p1[0], p1[1]); setL(tseg[0].fl, TH.b[0], TH.b[1], p1[0], p1[1]);
+    setL(tseg[0].ring, lerp(TH.b[0], p1[0], .45), lerp(TH.b[1], p1[1], .45), lerp(TH.b[0], p1[0], .7), lerp(TH.b[1], p1[1], .7));
+    setL(tseg[1].e, p1[0], p1[1], p2[0], p2[1]); setL(tseg[1].fl, p1[0], p1[1], p2[0], p2[1]);
+    H.tips[0] = p2;
+    for (let i = 0; i < 5; i++) {
+      const sv = servos[i], ang = rad(a[i]);
+      setL(sv.horn, sv.x, 233, sv.x + 9 * Math.cos(ang), 233 - 9 * Math.sin(ang));
+      setL(sv.str, sv.x + 9 * Math.cos(ang), 233 - 9 * Math.sin(ang), H.tips[i][0], H.tips[i][1]);
+    }
+  }
+  H.tick = dt => {
+    const k = 1 - Math.exp(-dt * 9);
+    let ch = H.dirty;
+    for (let i = 0; i < 5; i++) {
+      const d = H.tgt[i] - H.cur[i];
+      if (Math.abs(d) > .08) { H.cur[i] += d * k; ch = true; } else if (d !== 0) { H.cur[i] = H.tgt[i]; ch = true; }
+    }
+    if (ch) { pose(H.cur); H.dirty = false; if (H.onChange) H.onChange(H.cur); }
+  };
+  hands.push(H);
+  return H;
+}
+
+/* ---------- bucle de animación ---------- */
+const frameFns = [];
+let lastT = performance.now();
+function loop(t) {
+  const dt = Math.min(.05, (t - lastT) / 1000); lastT = t;
+  for (const h of hands) h.tick(dt);
+  for (const f of frameFns) f(t, dt);
+  requestAnimationFrame(loop);
+}
+
+/* ---------- simulador ---------- */
+const sim = createHand($('#simHand'));
+const angEls = $$('#angles div b');
+sim.onChange = a => a.forEach((v, i) => { angEls[i].textContent = Math.round(v) + '°'; });
+const simSvg = $('#simHand');
+const OPEN = [0, 0, 0, 0, 0];
+const GEST = { point: [150, 0, 180, 180, 180], peace: [150, 0, 0, 180, 180], thumb: [0, 180, 180, 180, 180], rock: [150, 0, 180, 180, 0] };
+const setT = a => { sim.tgt = a.slice(); };
+
+const fingerBtns = $$('#fingerBtns [data-f]');
+const allBtn = $('#allBtn');
+let fState = [false, false, false, false, false];
+const applyFingers = () => {
+  setT(fState.map(v => v ? 180 : 0));
+  fingerBtns.forEach(b => b.setAttribute('aria-pressed', fState[+b.dataset.f]));
+  allBtn.setAttribute('aria-pressed', fState.every(Boolean));
+};
+fingerBtns.forEach(b => b.addEventListener('click', () => { const i = +b.dataset.f; fState[i] = !fState[i]; applyFingers(); }));
+allBtn.addEventListener('click', () => { const v = !fState.every(Boolean); fState = fState.map(() => v); applyFingers(); });
+
+const gripRng = $('#gripRng'), gripVal = $('#gripVal');
+gripRng.addEventListener('input', () => { gripVal.textContent = gripRng.value + '°'; setT(Array(5).fill(+gripRng.value)); });
+
+function pressOnly(list, btn, attr) {
+  const was = btn.getAttribute('aria-pressed') === 'true';
+  $$('button', list).forEach(b => b.setAttribute('aria-pressed', 'false'));
+  if (!was) btn.setAttribute('aria-pressed', 'true');
+  return !was;
+}
+$('#pinchSel').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (pressOnly($('#pinchSel'), b)) { const a = [120, 0, 0, 0, 0]; a[+b.dataset.p] = 100; setT(a); } else setT(OPEN);
+});
+$('#gestSel').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (pressOnly($('#gestSel'), b)) setT(GEST[b.dataset.g]); else setT(OPEN);
+});
+
+const SEQ = [['Mano abierta', OPEN], ['Agarre', [120, 120, 120, 120, 120]], ['Pinza con el índice', [120, 100, 0, 0, 0]], ['Señalar', GEST.point], ['Paz', GEST.peace], ['Pulgar arriba', GEST.thumb], ['Rock', GEST.rock]];
+let seqTimer = null, seqI = 0;
+const seqBtn = $('#seqBtn'), seqNow = $('#seqNow');
+function seqStep() { const s = SEQ[seqI % SEQ.length]; setT(s[1]); seqNow.textContent = 'Ahora: ' + s[0]; seqI++; }
+function seqStop() { clearInterval(seqTimer); seqTimer = null; seqBtn.setAttribute('aria-pressed', 'false'); seqBtn.textContent = 'Iniciar secuencia'; seqNow.textContent = 'Detenida.'; }
+seqBtn.addEventListener('click', () => {
+  if (seqTimer) { seqStop(); setT(OPEN); return; }
+  seqI = 0; seqStep(); seqTimer = setInterval(seqStep, 1500);
+  seqBtn.setAttribute('aria-pressed', 'true'); seqBtn.textContent = 'Detener secuencia';
+});
+
+function resetGlove() {
+  seqStop(); fState = [false, false, false, false, false];
+  fingerBtns.forEach(b => b.setAttribute('aria-pressed', 'false')); allBtn.setAttribute('aria-pressed', 'false');
+  $$('#pinchSel button, #gestSel button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+  setT(OPEN);
+}
+const panes = $$('.mode-pane');
+tabs($('#modes'), (i, b) => {
+  resetGlove();
+  panes.forEach(p => { p.hidden = p.dataset.pane !== b.dataset.mode; });
+  if (b.dataset.mode === 'grip') { gripRng.value = 120; gripVal.textContent = '120°'; setT(Array(5).fill(120)); }
+});
+
+const phone = $('#phone'), pwr = $('#pwr');
+let powered = true;
+pwr.addEventListener('click', () => {
+  powered = !powered;
+  pwr.setAttribute('aria-pressed', powered);
+  phone.classList.toggle('dim', !powered);
+  $$('#phone button:not(#pwr), #phone input').forEach(el => { el.disabled = !powered; });
+  if (!powered) resetGlove();
+});
+
+/* músculo */
+const press = $('#press'), meterLine = $('#meterLine'), sigTxt = $('#sigTxt'), cnt = $('#cnt');
+const logicEls = $$('#logic2 span');
+let holding = false, sig = .05, wasAbove = false, closed = false, count = 0, flash = 0;
+const NB = 80, mbuf = Array(NB).fill(.05);
+const hold = v => { holding = v; press.classList.toggle('hold', v); };
+press.addEventListener('pointerdown', e => { try { press.setPointerCapture(e.pointerId); } catch (_) {} hold(true); });
+['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => press.addEventListener(ev, () => hold(false)));
+press.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { hold(true); e.preventDefault(); } });
+press.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') hold(false); });
+press.addEventListener('contextmenu', e => e.preventDefault());
+
+let muscleOn = false;
+frameFns.push((t, dt) => {
+  if (!muscleOn) return;
+  const target = holding ? .72 + (Math.random() - .5) * .3 : .05 + Math.random() * .05;
+  sig += (target - sig) * Math.min(1, dt * 10);
+  mbuf.push(sig); mbuf.shift();
+  meterLine.setAttribute('points', mbuf.map((v, i) => (i * 320 / (NB - 1)).toFixed(1) + ',' + (104 - v * 98).toFixed(1)).join(' '));
+  const above = sig > .5;
+  if (above && !wasAbove) { closed = !closed; count++; cnt.textContent = count; flash = 450; setT(Array(5).fill(closed ? 180 : 0)); }
+  wasAbove = above;
+  if (flash > 0) flash -= dt * 1000;
+  sigTxt.textContent = above ? 'contracción: ¡hay señal!' : 'en reposo';
+  logicEls.forEach((el, i) => el.classList.toggle('hi', i === 0 ? !above && flash <= 0 : i === 1 ? above : flash > 0 || above));
+});
+
+tabs($('.tabs[aria-label="Qué querés probar"]'), i => {
+  const g = i === 0;
+  $('#panG').hidden = !g; $('#panP').hidden = g;
+  simSvg.classList.toggle('glove', g);
+  muscleOn = !g;
+  if (g) { resetGlove(); panes.forEach(p => { p.hidden = p.dataset.pane !== 'std'; }); $$('#modes [role=tab]').forEach((b, k) => { b.setAttribute('aria-selected', k === 0); b.tabIndex = k === 0 ? 0 : -1; }); }
+  else { closed = false; count = 0; cnt.textContent = 0; setT(OPEN); }
+});
+
+/* ---------- prótesis: recorrido ---------- */
+const stageSvg = $('#stageSvg');
+const steps = $$('.step'), rail = $$('#rail button'), scenes = $$('#stageSvg .scene'), cap = $('#cap');
+const TITLES = steps.map(s => $('h3', s).textContent);
+const desktop = matchMedia('(min-width:900px)');
+let cur = 0;
+function setStep(n) {
+  if (n === cur) return;
+  cur = n;
+  steps.forEach((s, i) => s.classList.toggle('cur', i === n - 1));
+  scenes.forEach(s => s.classList.toggle('on', +s.dataset.scene === n));
+  rail.forEach((b, i) => { b.classList.toggle('cur', i === n - 1); b.classList.toggle('done', i < n - 1); b.setAttribute('aria-current', i === n - 1 ? 'step' : 'false'); });
+  cap.textContent = n + '. ' + TITLES[n - 1];
+}
+setStep(1);
+let tick = false;
+function onStoryScroll() {
+  const sw = $('#stageWrap').getBoundingClientRect();
+  const line = desktop.matches ? innerHeight * .45 : sw.bottom + 70;
+  let n = 1;
+  steps.forEach((s, i) => { if (s.getBoundingClientRect().top <= line) n = i + 1; });
+  setStep(n);
+}
+addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(() => { tick = false; onStoryScroll(); }); } }, { passive: true });
+addEventListener('resize', onStoryScroll);
+rail.forEach((b, i) => b.addEventListener('click', () => {
+  const r = steps[i].getBoundingClientRect();
+  const sw = $('#stageWrap').getBoundingClientRect();
+  const y = desktop.matches ? scrollY + r.top - innerHeight * .3 : scrollY + r.top - (56 + sw.height) - 14;
+  scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+}));
+if (reduce && stageSvg.pauseAnimations) stageSvg.pauseAnimations();
+
+/* escena 5: señal */
+const trace = $('#trace'), flag = $('#flag'), scene5 = $('#scene5');
+const TN = 72, tb = Array(TN).fill(0); let tAcc = 0;
+frameFns.push((t, dt) => {
+  if (cur !== 5) return;
+  const ph = reduce ? 1.5 : (t / 1000) % 3.6, burst = ph > .9 && ph < 2.5;
+  tAcc += dt;
+  while (tAcc > .03) { tAcc -= .03; tb.push(burst ? .3 + Math.random() * .7 : Math.random() * .1); tb.shift(); }
+  trace.setAttribute('points', tb.map((v, i) => (34 + i * 292 / (TN - 1)).toFixed(1) + ',' + (278 - v * 72).toFixed(1)).join(' '));
+  flag.style.opacity = Math.max(...tb.slice(-6)) > .46 ? 1 : 0;
+  scene5.classList.toggle('burst', burst);
+});
+
+/* escena 6: mano del recorrido */
+const stageHandSvg = $('#stageHand'); stageHandSvg.classList.add('hand');
+const stageHand = createHand(stageHandSvg);
+const angleTxt = $('#angleTxt');
+stageHand.onChange = a => { angleTxt.textContent = Math.round((a[1] + a[2] + a[3] + a[4]) / 4) + '°'; };
+frameFns.push(t => {
+  if (cur !== 6) { if (stageHand.tgt[1] !== 0) stageHand.tgt = [0, 0, 0, 0, 0]; return; }
+  const ph = reduce ? 2 : (t / 1000) % 5.4, c = ph > .8 && ph < 3.1;
+  const v = c ? 180 : 0;
+  if (stageHand.tgt[1] !== v) stageHand.tgt = Array(5).fill(v);
+});
+
+/* ---------- app ---------- */
+tabs($('#appTabs'), i => {
+  const rep = i === 1;
+  $('#figApp').hidden = rep; $('#figRep').hidden = !rep;
+  $('#featApp').hidden = rep; $('#featRep').hidden = !rep;
+});
+
+/* ---------- componentes ---------- */
+const fb = $$('#filters button'), cards = $$('#cards .card');
+fb.forEach(b => b.addEventListener('click', () => {
+  fb.forEach(x => x.setAttribute('aria-pressed', x === b));
+  const f = b.dataset.f;
+  cards.forEach(c => { c.hidden = !(f === 'all' || c.dataset.cat.split(' ').includes(f)); });
+}));
+
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
